@@ -173,8 +173,33 @@ This is a supercomputer cluster ar SwRI.
 
 ###### Environment (after applying tricks if any)
 
-##### Cholla
-This is the planetary group cluster ar ASU.
+##### Cholla (This is the planetary group cluster ar ASU.)
+
+Download the most bleeding edge version
+```hg clone http://hg.code.sf.net/p/spheral/code spheral```
+
+Use the following compiler flags
+```./configure --with-compilers=gnu --without-opensubdiv```
+ 
+NOTE: 'opensubdiv' is a dependency of one of the thirdpartypackages. It is developed by Pixar and has its own dependencies on 3D modeling/graphics software like Maya and, strangely enough, another piece of software developed by Warner Brothers Studios.
+ 
+You may still get errors about a non-existant compiler "mpig++". In this case, alter the config line to use "mpic++" in place of "mpig++".
+
+After install, when running test files you may get this error:
+ ```
+ [root@headnode benchmark]# /home/gabrt/bin/spheral/src/BUILD/Linux_x86_64/bin/python -i Noh-spherical-3d-benchmark.py
+/home/gabrt/bin/spheral/src/BUILD/Linux_x86_64/lib/python2.7/site-packages/Spheral/mpi.py:8: RuntimeWarning: compiletime version 2.6 of module 'mpi4py.MPI' does not match runtime version 2.7
+  from mpi4py import MPI
+Traceback (most recent call last):
+  File "Noh-spherical-3d-benchmark.py", line 13, in <module>
+    import loadmpi
+ImportError: No module named loadmpi
+>>>
+```
+Run the test files this way instead:
+```
+../../spheral/src/BUILD/Linux_x86_64/bin/ats -e ../../spheral/src/BUILD/Linux_x86_64/bin/python integration.ats
+```
 
 ###### System
 
